@@ -59,7 +59,7 @@ void PrintDice(int round)
 
 void FixDice()
 {
-    Console.WriteLine("Fixieren?");
+    Console.WriteLine("Which dice do you want to fix/unfix? (w-5, or 'r' to roll dice)");
     do
     {
         input = Convert.ToChar(Console.ReadLine()!);
