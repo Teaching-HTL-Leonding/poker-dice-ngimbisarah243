@@ -1,11 +1,19 @@
-﻿int dice1 = 0, dice2 = 0, dice3 = 0, dice4 = 0, dice5 = 0;
+﻿const string FIVE_OF_A_KIND = "Five of a kind!";
+const string FOUR_OF_A_KIND = "Four of a kind!";
+const string FULL_HOUSE = "Full house!";
+const string THREE_OF_A_KIND = "Three of a kind!";
+const string TWO_PAIRS = "Two pairs!";
+const string ONE_PAIR = "One pair!";
+const string STRAIGHT = "Straight!";
+const string BUST = "Bust!";
+
+int dice1 = 0, dice2 = 0, dice3 = 0, dice4 = 0, dice5 = 0;
 bool fixed1, fixed2, fixed3, fixed4, fixes5;
 int[] dice;
 char input;
 int handPlayer1 = 0;
 int handPlayer2 = 0;
 string hand = String.Empty;
-
 
 PlayGame(1);
 Console.WriteLine();
@@ -29,7 +37,7 @@ void PlayGame(int player)
         SortDice(dice1, dice2, dice3, dice4, dice5);
         PrintDice(i);
         if (i < 3) FixDice();
-        if(i == 3 || fixed1==fixed2==fixed3==fixed4==fixes5==true)
+        if(i == 3 || fixed1==true &&fixed2==true && fixed3==true &&fixed4==true&&fixes5==true)
         {
             AnalyzeAndPrintResult();
             if (player == 1) { handPlayer1 = DetermineWinner(handPlayer1); }
@@ -134,10 +142,10 @@ void AnalyzeAndPrintResult()
 
     Console.ForegroundColor = ConsoleColor.Magenta;
 
-    if (five_of_a_kind) { hand = "Five of a kind!"; }
-    else if (four_of_a_kind) { hand = "Four of a kind!"; }
-    else if (fullHouse && pair) { hand = "Full House!"; }
-    else if (fullHouse) { hand = "Three of a kind!"; }
+    if (five_of_a_kind) { hand = FIVE_OF_A_KIND; }
+    else if (four_of_a_kind) { hand = FOUR_OF_A_KIND; }
+    else if (fullHouse && pair) { hand = FULL_HOUSE; }
+    else if (fullHouse) { hand = THREE_OF_A_KIND; }
     else if (pair)
     {
         for (int a = 0; a < dice.Length; a++)
@@ -150,17 +158,17 @@ void AnalyzeAndPrintResult()
                 }
             }
         }
-        if (pairs == 2) { hand = "Two Paires"; }
-        else { hand = "One Pair"; }
+        if (pairs == 2) { hand = TWO_PAIRS; }
+        else { hand = ONE_PAIR; }
     }
 
     else if (straight)
     {
         if (dice[0] == dice[1] - 1 && dice[1] == dice[2] - 1 && dice[2] == dice[3] - 1 && dice[3] == dice[4] - 1)
         {
-            hand = "Straight!";
+            hand = STRAIGHT;
         }
-        else { hand = "Bust!"; }
+        else { hand = BUST; }
     }
 
     Console.WriteLine(hand);
@@ -170,13 +178,13 @@ void AnalyzeAndPrintResult()
 }
 int DetermineWinner(int stufe)
 {
-    if (hand == "Five of a kind!") { stufe = 8; }
-    else if (hand == "Four of a kind!") { stufe = 7; }
-    else if (hand == "Full House!") { stufe = 6; }
-    else if (hand == "Three of a kind!") { stufe = 5; }
-    else if (hand == "Two Paires") { stufe = 4; }
-    else if (hand == "One Pair") { stufe = 3; }
-    else if (hand == "Straight") { stufe = 2; }
+    if (hand == FIVE_OF_A_KIND) { stufe = 8; }
+    else if (hand == FOUR_OF_A_KIND) { stufe = 7; }
+    else if (hand == FULL_HOUSE) { stufe = 6; }
+    else if (hand == THREE_OF_A_KIND) { stufe = 5; }
+    else if (hand == TWO_PAIRS) { stufe = 4; }
+    else if (hand == ONE_PAIR) { stufe = 3; }
+    else if (hand == STRAIGHT) { stufe = 2; }
     else { stufe = 1; }
 
     return stufe;
